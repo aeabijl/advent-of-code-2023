@@ -4,7 +4,7 @@ import time
 def is_record(hold, time, distance):
     return hold * (time - hold) > distance
 
-def first_best_score_left(time, distance):
+def get_lower_boundary(time, distance):
     low, high = 0, time
     while low < high:
         middle_button_hold = low + (high - low >> 1)
@@ -15,7 +15,7 @@ def first_best_score_left(time, distance):
     return low
 
 
-def first_best_score_right(time, distance):
+def get_upper_boundary(time, distance):
     low, high = 0, time
     while low <= high:
         middle_button_hold = low + (high - low >> 1)
@@ -26,7 +26,7 @@ def first_best_score_right(time, distance):
     return high
 
 def determine_number_of_ways_to_win(time, distance):
-    return first_best_score_right(time, distance) - first_best_score_left(time, distance) + 1
+    return get_upper_boundary(time, distance) - get_lower_boundary(time, distance) + 1
 
 
 def solve(filepath):
